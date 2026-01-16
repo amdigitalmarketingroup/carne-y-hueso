@@ -16,10 +16,10 @@ export function OpenTableWidget() {
                         <span className="font-mono text-xs uppercase tracking-widest opacity-60">Parties 1-9</span>
                     </div>
 
-                    {/* OpenTable Widget - Replace 'RESTAURANT_ID' with actual ID */}
+                    {/* OpenTable Widget */}
                     <div id="ot-widget-container" className="min-h-[400px]">
                         <Script
-                            src="//www.opentable.com/widget/reservation/loader?rid=RESTAURANT_ID&type=standard&theme=standard&color=1&dark=false&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website"
+                            src="//www.opentable.com/widget/reservation/loader?rid=1480066&type=standard&theme=standard&color=1&dark=false&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website"
                             strategy="lazyOnload"
                         />
                     </div>

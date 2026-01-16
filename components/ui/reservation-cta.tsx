@@ -16,20 +16,7 @@ export function ReservationCTA() {
                 Book a Table
             </motion.a>
 
-            {/* MOBILE: Sticky Bar above Bottom Nav */}
-            <motion.div
-                className="lg:hidden fixed bottom-[72px] left-0 w-full z-40 px-4 pb-2"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1 }}
-            >
-                <a
-                    href="#reservations"
-                    className="block w-full bg-ink-black text-bone-white text-center py-3 font-mono text-xs uppercase tracking-widest rounded-lg shadow-lg"
-                >
-                    Book a Table
-                </a>
-            </motion.div>
+            {/* MOBILE: Removed in favor of Bottom Nav Icon */}
         </>
     );
 }

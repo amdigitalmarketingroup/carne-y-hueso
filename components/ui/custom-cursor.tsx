@@ -46,7 +46,7 @@ export function CustomCursor() {
     return (
         <motion.div
             className={cn(
-                "fixed top-0 left-0 pointer-events-none z-50 mix-blend-difference",
+                "fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference",
                 "flex items-center justify-center"
             )}
             style={{

@@ -98,7 +98,7 @@ export function MenuSection() {
                                 <img
                                     src={selectedDish.image}
                                     alt={selectedDish.name}
-                                    className="w-full h-full object-cover grayscale contrast-125"
+                                    className="w-full h-full object-cover contrast-125"
                                 />
                                 <button
                                     onClick={() => setSelectedDish(null)}

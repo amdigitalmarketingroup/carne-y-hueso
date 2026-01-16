@@ -57,6 +57,18 @@ body {
   }
 }
 
+@media (min-width: 1024px) {
+
+  *,
+  *::before,
+  *::after,
+  a,
+  button,
+  [role="button"] {
+    cursor: none !important;
+  }
+}
+
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom);
 }

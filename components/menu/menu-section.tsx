@@ -10,7 +10,9 @@ export function MenuSection() {
 
     // Lock body scroll when drawer is open
     useEffect(() => {
-        if (selectedDish) {
+        const isMobile = window.innerWidth < 1024
+
+        if (selectedDish && isMobile) {
             document.body.style.overflow = 'hidden'
         } else {
             document.body.style.overflow = 'unset'

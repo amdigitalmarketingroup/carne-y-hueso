@@ -1,8 +1,29 @@
 "use client"
 
-import Script from "next/script"
+import { useEffect, useRef } from "react"
 
 export function OpenTableWidget() {
+    const widgetRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        // Load OpenTable widget script
+        const script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = '//www.opentable.com/widget/reservation/loader?rid=1480066&type=standard&theme=standard&color=1&dark=false&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website'
+        script.async = true
+
+        if (widgetRef.current) {
+            widgetRef.current.appendChild(script)
+        }
+
+        return () => {
+            // Cleanup script on unmount
+            if (widgetRef.current && script.parentNode === widgetRef.current) {
+                widgetRef.current.removeChild(script)
+            }
+        }
+    }, [])
+
     return (
         <div className="border-2 border-ink-black bg-bone-white">
             {/* Header */}
@@ -16,21 +37,10 @@ export function OpenTableWidget() {
             {/* OpenTable Widget Container */}
             <div className="p-6">
                 <div
+                    ref={widgetRef}
                     id="ot-widget-container"
                     className="min-h-[500px] w-full"
-                    style={{
-                        width: '100%',
-                        maxWidth: '100%'
-                    }}
-                >
-                    <Script
-                        src="//www.opentable.com/widget/reservation/loader?rid=1480066&type=standard&theme=standard&color=1&dark=false&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website"
-                        strategy="afterInteractive"
-                        onLoad={() => {
-                            console.log('OpenTable widget loaded')
-                        }}
-                    />
-                </div>
+                />
             </div>
         </div>
     )

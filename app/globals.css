@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-display: var(--font-playfair);
+  --font-mono: var(--font-space-mono);
+  --font-sans: var(--font-inter);
+
+  --color-bone-white: #F4F2ED;
+  --color-ink-black: #0F0F0F;
+  /* Darker, richer black */
+  --color-charcoal: #1A1A1A;
+  --color-oxblood: #4A0404;
+  --color-gold: #D4AF37;
+  --color-cream: #F5F5DC;
+  --color-terracotta: #E2725B;
+
+  --cursor-custom: url('/cursor.svg'), auto;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Custom Scrollbar for Desktop */
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1A1A1A;
+    border-radius: 4px;
   }
 }
 
+/* Hide scrollbar for mobile "app" feel but allow scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bone-white);
+  color: var(--color-ink-black);
+  cursor: none;
+  /* We will use a custom cursor */
+}
+
+@media (max-width: 1023px) {
+  body {
+    cursor: auto;
+    /* Normal cursor on mobile */
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@utility safe-bottom {
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
 }

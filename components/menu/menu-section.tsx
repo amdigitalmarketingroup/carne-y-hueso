@@ -8,7 +8,37 @@ import { X, ArrowRight } from "lucide-react"
 export function MenuSection() {
     const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
 
-    // Scroll lock removed to fix user interaction issues
+    // Strict scroll lock with position-based freezing
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+
+        const isMobile = window.innerWidth < 1024
+
+        if (selectedDish && isMobile) {
+            // 1. Save current scroll position
+            const scrollY = window.scrollY
+
+            // 2. Lock body by fixing position (prevents ALL background scroll)
+            document.body.style.position = 'fixed'
+            document.body.style.top = `-${scrollY}px`
+            document.body.style.width = '100%'
+            document.body.style.overflow = 'hidden'
+            // 3. Prevent touches on body (except where explicitly allowed)
+            document.body.style.touchAction = 'none'
+
+            return () => {
+                // Cleanup: Unlock everything
+                document.body.style.position = ''
+                document.body.style.top = ''
+                document.body.style.width = ''
+                document.body.style.overflow = ''
+                document.body.style.touchAction = ''
+
+                // 4. Restore exact scroll position
+                window.scrollTo(0, scrollY)
+            }
+        }
+    }, [selectedDish])
 
     return (
         <section
@@ -111,7 +141,15 @@ export function MenuSection() {
                                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-bone-white to-transparent" />
                             </div>
 
-                            <div className="flex-1 px-8 pt-4 pb-8 safe-bottom overflow-y-auto overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+                            <div
+                                className="flex-1 px-8 pt-4 pb-8 safe-bottom overflow-y-auto overscroll-contain"
+                                style={{
+                                    WebkitOverflowScrolling: 'touch',
+                                    touchAction: 'pan-y' // Explicitly allow vertical scroll here
+                                }}
+                                // Stop propagation of touch events to background/locked body
+                                onTouchMove={(e) => e.stopPropagation()}
+                            >
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
                                         <p className="font-mono text-xs text-oxblood uppercase tracking-widest mb-2">Specimen 00{selectedDish.id}</p>

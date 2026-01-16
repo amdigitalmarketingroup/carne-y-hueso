@@ -23,7 +23,7 @@ export default function Home() {
       <Hero />
 
       {/* Menu Section */}
-      <div className="relative z-20 bg-bone-white sticky top-0 lg:static">
+      <div className="relative z-20 bg-bone-white lg:sticky lg:top-0">
         <MenuSection />
       </div>
 

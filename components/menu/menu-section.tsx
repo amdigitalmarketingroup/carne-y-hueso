@@ -109,7 +109,7 @@ export function MenuSection() {
                                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-bone-white to-transparent" />
                             </div>
 
-                            <div className="flex-1 px-8 pt-4 pb- safe-bottom overflow-y-auto">
+                            <div className="flex-1 px-8 pt-4 pb-8 safe-bottom overflow-y-auto overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
                                         <p className="font-mono text-xs text-oxblood uppercase tracking-widest mb-2">Specimen 00{selectedDish.id}</p>

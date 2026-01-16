@@ -13,14 +13,35 @@ export function MenuSection() {
         const isMobile = window.innerWidth < 1024
 
         if (selectedDish && isMobile) {
+            // Save current scroll position
+            const scrollY = window.scrollY
+
+            // Lock scroll while maintaining position
+            document.body.style.position = 'fixed'
+            document.body.style.top = `-${scrollY}px`
+            document.body.style.width = '100%'
             document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = 'unset'
+
+        } else if (isMobile) {
+            // Restore scroll position
+            const scrollY = document.body.style.top
+            document.body.style.position = ''
+            document.body.style.top = ''
+            document.body.style.width = ''
+            document.body.style.overflow = ''
+
+            // Restore exact scroll position
+            if (scrollY) {
+                window.scrollTo(0, parseInt(scrollY || '0') * -1)
+            }
         }
 
         // Cleanup on unmount
         return () => {
-            document.body.style.overflow = 'unset'
+            document.body.style.position = ''
+            document.body.style.top = ''
+            document.body.style.width = ''
+            document.body.style.overflow = ''
         }
     }, [selectedDish])
 

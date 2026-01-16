@@ -1,12 +1,26 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { menuItems, type Dish } from "@/components/data/menu"
 import { X, ArrowRight } from "lucide-react"
 
 export function MenuSection() {
     const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
+
+    // Lock body scroll when drawer is open
+    useEffect(() => {
+        if (selectedDish) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflow = 'unset'
+        }
+    }, [selectedDish])
 
     return (
         <section
